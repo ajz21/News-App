@@ -15,6 +15,8 @@
    apiKey=${myKey}`*/
 
 // https://newsapi.org/v2/everything?q=${searchItem}&apiKey=b65e82c1ab1b4e768a273f36de34557d
+let storyUrl =
+    "https://newsapi.org/v2/everything?q=op-ed&apiKey=b65e82c1ab1b4e768a273f36de34557d";
 
 let apiKey = "b65e82c1ab1b4e768a273f36de34557d";
 let searchItem = "bitcoin";
@@ -57,7 +59,7 @@ let loadHead = () => {
         });
 };
 
-let author = document.getElementsByClassName('author');
+let author = document.getElementsByClassName("author");
 // console.log(author[0]);
 // loadHead();
 let j = 0;
@@ -77,20 +79,34 @@ let loadnews = () => {
             //     }
             // }
             for (let york of news_slides) {
-                if(data.articles[i].urlToImage != null && data.articles[i].author != null){
+                if (
+                    data.articles[i].urlToImage != null &&
+                    data.articles[i].author != null
+                ) {
                     console.log(data.articles[i]);
-                (york.firstElementChild.src = data.articles[i].urlToImage),
-                    (york.lastElementChild.innerText = data.articles[i].author),
-                    (author[i].href = data.articles[i].url),
-                    (author[i].innerText = data.articles[i].title);
-                
-                // j++;
-            }
-            i++;
+                    (york.firstElementChild.src = data.articles[i].urlToImage),
+                        (york.lastElementChild.innerText =
+                            data.articles[i].author),
+                        (author[i].href = data.articles[i].url),
+                        (author[i].innerText = data.articles[i].title);
+
+                    // j++;
+                }
+                i++;
             }
             // newsLaod.innerHTML = html;
         });
 };
+
+let loadStories = () => {
+    fetch(storyUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data.articles);
+        });
+};
+
+loadStories();
 let news_slides = document.getElementsByClassName("newsSlide");
 
 // for (let york of news_slides) {
