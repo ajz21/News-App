@@ -91,9 +91,10 @@ li {
     background-color: var(--color);
     /* background-color: white; */
 }
-.newsChild p {
+.newsChild a {
     width: 22ch;
     opacity: 80%;
+    height: 69px;
     overflow: hidden;
 }
 .head-lines {
@@ -102,6 +103,7 @@ li {
 }
 .newsChild img {
     height: 75px;
+    width: 75px;
     border-radius: 40px;
 }
 .coursel {
