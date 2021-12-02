@@ -49,6 +49,7 @@ let loadHead = () => {
                 (headline_text.href = data.articles[0].url);
             for (key of side_news) {
                 (key.firstElementChild.src = data.articles[i].urlToImage),
+                    (key.lastElementChild.href = data.articles[i].url),
                     (key.lastElementChild.innerText = data.articles[i].title);
                 i++;
             }
