@@ -46,7 +46,7 @@ body {
 section {
     width: -webkit-fill-available;
 }
-ul {
+section ul {
     display: flex;
     font-weight: bold;
     justify-content: space-between;
@@ -128,8 +128,9 @@ li {
     width: 318px;
 }
 .newsLoad {
-    display: grid;
-    grid-gap: 1pc;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 3pc;
 }
 .newsLoad img {
     height: 125px;
@@ -158,6 +159,9 @@ li {
     background-color: rgba(51, 102, 204, 0.2);
     font-size: 17px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .newsLoadContainer {
     display: flex;
@@ -169,7 +173,8 @@ li {
     grid-gap: 1pc;
 }
 .news-random-2 img {
-    height: 326px;
+    height: 300px;
+    width: -webkit-fill-available;
 }
 .news-random-2 {
     border: solid 1px #686868;
