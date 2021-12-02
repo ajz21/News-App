@@ -109,14 +109,23 @@ li {
 .coursel {
     display: flex;
     grid-gap: 20px;
+    width: 1000px;
+    overflow: hidden;
 }
 .newsSlide {
     background-color: var(--secColor);
     /* background-color: whitesmoke; */
+    justify-content: space-between;
+}
+.newsSlide p{
+    opacity:70%;
+    font-size: 15px;
+    position: relative;
+    bottom: 1pc;
 }
 .newsSlide img {
     height: 200px;
-    width: -webkit-fill-available;
+    width: 318px;
 }
 .newsLoad {
     display: grid;

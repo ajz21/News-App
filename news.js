@@ -19,7 +19,7 @@
 let apiKey = "b65e82c1ab1b4e768a273f36de34557d";
 let searchItem = "bitcoin";
 let country = "in";
-let url = `https://newsapi.org/v2/everything?q=${searchItem}&apiKey=${apiKey}`;
+let url = `https://newsapi.org/v2/everything?q=editorials&sortBy=popularity&apiKey=${apiKey}`;
 
 let headLineUrl = `https://newsapi.org/v2/top-headlines?
 country=${country}&
@@ -38,8 +38,9 @@ let newsLaod = document.getElementById("newsLoad");
 // headline_image.src = "mike.jpg";
 
 let Nname = document.getElementById("name");
+let side_news = document.getElementsByClassName("newsChild");
 
-let i = 1;
+let i = 0;
 let loadHead = () => {
     fetch(headLineUrl2)
         .then((response) => response.json())
@@ -56,37 +57,49 @@ let loadHead = () => {
         });
 };
 
-let side_news = document.getElementsByClassName("newsChild");
-
-// console.log(side_news.length);
-// for(keys of side_news){
-//     console.log(keys.firstElementChild);
-//     console.log(keys.lastElementChild);
-// }
-// for(item in side_news){
-//     console.log(item);
-// }
-
-loadHead();
+let author = document.getElementsByClassName('author');
+// console.log(author[0]);
+// loadHead();
+let j = 0;
 let loadnews = () => {
-    // fetch(url)
-    // .then((response)=> response.json())
-    // .then((data) => {
-    //     headline_image.src = data.articles[0].urlToImage;
-    // });
     let html = "";
 
-    fetch(headLineUrl)
+    fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            for (let item of data.articles) {
-                if(item.urlToImage != null){
-                html += `<div class="news-random news-random-style"><img src="${item.urlToImage}" alt=""><div class="news-roundup"><a href="${item.url}" target="_blank" class="heading-3">${item.title}</a></div></div>`;
-            }}
-    newsLaod.innerHTML = html;
+            // console.log(data.articles);
+            // for(let r in data.articles){
+            // console.log(data.articles[i].author != null);
+            // console.log(data.articles[r].urlToImage != null);}
+            // for (let item of data.articles) {
+            //     if (item.urlToImage != null) {
+            //         html += `<div class="news-random news-random-style"><img src="${item.urlToImage}" alt=""><div class="news-roundup"><a href="${item.url}" target="_blank" class="heading-3">${item.title}</a></div></div>`;
+            //     }
+            // }
+            for (let york of news_slides) {
+                if(data.articles[i].urlToImage != null && data.articles[i].author != null){
+                    console.log(data.articles[i]);
+                (york.firstElementChild.src = data.articles[i].urlToImage),
+                    (york.lastElementChild.innerText = data.articles[i].author),
+                    (author[i].href = data.articles[i].url),
+                    (author[i].innerText = data.articles[i].title);
+                
+                // j++;
+            }
+            i++;
+            }
+            // newsLaod.innerHTML = html;
         });
-
-    
 };
+let news_slides = document.getElementsByClassName("newsSlide");
 
+// for (let york of news_slides) {
+    //     console.log(york.firstElementChild);
+    //     console.log(york.lastElementChild);
+    // console.log(york.lastElementChild.innerText);
+    // console.log(york.lastElementChild.href);
+    // console.log(york.lastElementChild.lastElementChild.innerText);
+// }
+// console.log(news_slides.firstElementChild);
+// console.log(news_slides.lastElementChild);
 Nname.addEventListener("click", loadnews);
