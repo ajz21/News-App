@@ -38,9 +38,14 @@ let headline_text = document.getElementById("head-text"),
     side_news = document.getElementsByClassName("newsChild"),
     author = document.getElementsByClassName("author");
 
+
 let headContainer = document.querySelector(".newsContent");
 let breaking = document.getElementById("breaking");
+let sideHeadLine = document.getElementById('sidenews');
+
+
 let headScript = "";
+let sideHeadSrcipt = "";
 
 // <div id="breaking" class="newsCard"></div>
 
@@ -56,13 +61,19 @@ let loadHead = () => {
                 <img id="head-img" src="${data.articles[0].urlToImage}" alt=""/>
                 <a href="${data.articles[0].url}" target="_blank" class="head-lines" id="head-text" style="font-size: 27px;">${data.articles[0].title}</a>`;
             }
-            breaking.innerHTML = headScript;
 
-            
+            for (let i = 1; i < 5; i++) {
+                sideHeadSrcipt += `<div class="newsChild">
+                <img src="${data.articles[i].urlToImage}" alt=""/><a href="${data.articles[i].url}" target="_blank" class="head-lines">${data.articles[i].title}</a>
+            </div>`
+            }
+
+            breaking.innerHTML = headScript;
+            sideHeadLine.innerHTML = sideHeadSrcipt;
         });
 };
 
-// loadHead();
+loadHead();
 let loadnews = () => {
     let html = "";
 
@@ -115,4 +126,4 @@ let loadSideStories = () => {
 // loadBySports();
 
 
-Nname.addEventListener("click", loadnews);
+// Nname.addEventListener("click", loadnews);
