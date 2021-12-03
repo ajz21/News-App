@@ -16,12 +16,11 @@
 
 // https://newsapi.org/v2/everything?q=${searchItem}&apiKey=b65e82c1ab1b4e768a273f36de34557d
 
-
 let apiKey = "b65e82c1ab1b4e768a273f36de34557d";
 let searchItem = "bitcoin";
 let country = "in";
 
-let url = `https://newsapi.org/v2/everything?q=editorials&sortBy=popularity&apiKey=${apiKey}`;
+let url = `https://newsapi.org/v2/everything?q=editorial&sortBy=relevency&apiKey=${apiKey}`;
 let storyUrl = `https://newsapi.org/v2/everything?q=op-ed&apiKey=${apiKey}`;
 let sideUrl = `https://newsapi.org/v2/everything?q=sports&apiKey=${apiKey}`;
 let headLineUrl = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apiKey}`;
@@ -38,17 +37,15 @@ let headline_text = document.getElementById("head-text"),
     side_news = document.getElementsByClassName("newsChild"),
     author = document.getElementsByClassName("author");
 
-
 let headContainer = document.querySelector(".newsContent");
 let breaking = document.getElementById("breaking");
-let sideHeadLine = document.getElementById('sidenews');
-
+let sideHeadLine = document.getElementById("sidenews");
+let coursel = document.querySelector(".coursel");
 
 let headScript = "";
 let sideHeadSrcipt = "";
 
-// <div id="breaking" class="newsCard"></div>
-
+// function for loading headline and Breaking news
 let loadHead = () => {
     fetch(headLineUrl2)
         .then((response) => response.json())
@@ -65,7 +62,7 @@ let loadHead = () => {
             for (let i = 1; i < 5; i++) {
                 sideHeadSrcipt += `<div class="newsChild">
                 <img src="${data.articles[i].urlToImage}" alt=""/><a href="${data.articles[i].url}" target="_blank" class="head-lines">${data.articles[i].title}</a>
-            </div>`
+            </div>`;
             }
 
             breaking.innerHTML = headScript;
@@ -73,17 +70,28 @@ let loadHead = () => {
         });
 };
 
-loadHead();
-let loadnews = () => {
-    let html = "";
+let loadEd = () => {
+    let edScript = "";
 
     fetch(url)
         .then((response) => response.json())
-        .then((data) => {});
+        .then((data) => {
+            for (let i of data.articles) {
+                if (i.urlToImage != null && i.author != null) {
+                    edScript += `<div class="newsSlide newsCard">
+                <img src="${i.urlToImage}" alt=""/>
+                <a href="${i.url}" target="_blank" class="head-lines author">${i.title}</a>
+                <p>${i.author}</p>
+            </div>`;
+                }
+            }
+            coursel.innerHTML = edScript;
+        });
 };
 
 let script = "";
 
+// funciton to load stories
 let loadStories = () => {
     fetch(storyUrl)
         .then((response) => response.json())
@@ -99,6 +107,8 @@ let loadStories = () => {
 };
 
 let sideScript = "";
+
+// function to load side stories
 let loadSideStories = () => {
     fetch(sideUrl)
         .then((response) => response.json())
@@ -113,10 +123,35 @@ let loadSideStories = () => {
         });
 };
 
+let index = 0;
+
+let next = document.getElementById("nextBtn");
+let pre = document.getElementById("preBtn");
+
+let slide = () => {
+    pre.classList.toggle("nextBtn", true);
+    if (index < coursel.children.length - 3) {
+        index++;
+        coursel.style.transform = "translateX(" + index * -34 + "%)";
+    } else {
+        index = 0;
+    }
+};
+pre.addEventListener("click", () => {
+    if (index != 0) {
+        index--;
+        coursel.style.transform = "translateX(" + index * -34 + "%)";
+    } else {
+        // index =
+    }
+});
+
+next.addEventListener("click", slide);
 // loadStories();
 // loadSideStories();
-// loadHeadline();
+// loadHead();
 // loadBreaking();
+// loadEd();
 // loadEditorials();
 // loadBynational();
 // loadByinternational();
@@ -124,6 +159,5 @@ let loadSideStories = () => {
 // loadByBusiness();
 // loadBypolitics();
 // loadBySports();
-
 
 // Nname.addEventListener("click", loadnews);
