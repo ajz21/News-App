@@ -142,6 +142,7 @@ li {
     opacity: 65%;
 }
 .head-lines-of-roundup {
+    cursor: default;
     font-size: 17px;
     opacity: 100%;
 }
