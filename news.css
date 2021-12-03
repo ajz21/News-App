@@ -109,6 +109,9 @@ li {
 .coursel {
     display: flex;
     grid-gap: 20px;
+    transition-duration: .8s;
+}
+.frame{
     width: 1000px;
     overflow: hidden;
 }
