@@ -38,16 +38,31 @@ let headline_text = document.getElementById("head-text"),
     side_news = document.getElementsByClassName("newsChild"),
     author = document.getElementsByClassName("author");
 
+let headContainer = document.querySelector(".newsContent");
+let breaking = document.getElementById("breaking");
+let headScript = "";
+
+// <div id="breaking" class="newsCard"></div>
+
 let loadHead = () => {
     fetch(headLineUrl2)
         .then((response) => response.json())
         .then((data) => {
-            (headline_text.innerText = data.articles[0].title),
-                (headline_image.src = data.articles[0].urlToImage),
-                (headline_text.href = data.articles[0].url);
+            if (
+                data.articles[0].urlToImage != null &&
+                data.articles[0].title != null
+            ) {
+                headScript += `
+                <img id="head-img" src="${data.articles[0].urlToImage}" alt=""/>
+                <a href="${data.articles[0].url}" target="_blank" class="head-lines" id="head-text" style="font-size: 27px;">${data.articles[0].title}</a>`;
+            }
+            breaking.innerHTML = headScript;
+
+            
         });
 };
 
+// loadHead();
 let loadnews = () => {
     let html = "";
 
