@@ -111,6 +111,12 @@ li {
     grid-gap: 20px;
     transition-duration: .8s;
 }
+.preBtn {
+    display: none;
+}
+.nextBtn{
+    display: block;
+}
 .frame{
     width: 1000px;
     overflow: hidden;
@@ -125,6 +131,7 @@ li {
     font-size: 15px;
     position: relative;
     bottom: 1pc;
+    text-align: center;
 }
 .newsSlide img {
     height: 200px;
