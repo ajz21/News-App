@@ -1,49 +1,29 @@
 // b65e82c1ab1b4e768a273f36de34557d
 
-/* `https://newsapi.org/v2/everything? 
-    q=${keyword}& 
-    from=${this.date}
-    sortBy={sort}& 
-    apiKey=${myKey}`;*/
-
-/* `https://newsapi.org/v2/top-headlines?
-    country=${country}&
-    apiKey=${myKey}`*/
-
-/*`https://newsapi.org/v2/top-headlines? 
-   sources=${source}& 
-   apiKey=${myKey}`*/
-
 // https://newsapi.org/v2/everything?q=${searchItem}&apiKey=b65e82c1ab1b4e768a273f36de34557d
 
 let apiKey = "b65e82c1ab1b4e768a273f36de34557d";
-let searchItem = "bitcoin";
-let country = "in";
 
 let url = `https://newsapi.org/v2/everything?q=editorial&sortBy=relevency&apiKey=${apiKey}`;
-let storyUrl = `https://newsapi.org/v2/everything?q=op-ed&apiKey=${apiKey}`;
-let sideUrl = `https://newsapi.org/v2/everything?q=sports&apiKey=${apiKey}`;
-let headLineUrl = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apiKey}`;
+let storyUrl = `https://newsapi.org/v2/everything?q=stories&sortBy=popularity&apiKey=${apiKey}`;
+let sideUrl = `https://newsapi.org/v2/everything?q=sports&sortBy=popularity&apiKey=${apiKey}`;
 let headLineUrl2 = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}`;
 
 console.log("connected");
 
-let headline_text = document.getElementById("head-text"),
-    headline_image = document.getElementById("head-img"),
-    newsLaod = document.querySelector(".news-random2"),
+let newsLaod = document.querySelector(".news-random2"),
     sideLoad = document.querySelector("#newsLoad"),
-    news_slides = document.getElementsByClassName("newsSlide"),
-    Nname = document.getElementById("name"),
-    side_news = document.getElementsByClassName("newsChild"),
-    author = document.getElementsByClassName("author");
-
-let headContainer = document.querySelector(".newsContent");
-let breaking = document.getElementById("breaking");
-let sideHeadLine = document.getElementById("sidenews");
-let coursel = document.querySelector(".coursel");
+    headContainer = document.querySelector(".newsContent"),
+    breaking = document.getElementById("breaking"),
+    sideHeadLine = document.getElementById("sidenews"),
+    newsContainer = document.querySelector(".newsContainer"),
+    coursel = document.querySelector(".coursel");
 
 let headScript = "";
 let sideHeadSrcipt = "";
+let edScript = "";
+let script = "";
+let sideScript = "";
 
 // function for loading headline and Breaking news
 let loadHead = () => {
@@ -71,8 +51,6 @@ let loadHead = () => {
 };
 
 let loadEd = () => {
-    let edScript = "";
-
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -89,8 +67,6 @@ let loadEd = () => {
         });
 };
 
-let script = "";
-
 // funciton to load stories
 let loadStories = () => {
     fetch(storyUrl)
@@ -106,15 +82,12 @@ let loadStories = () => {
         });
 };
 
-let sideScript = "";
-
 // function to load side stories
 let loadSideStories = () => {
     fetch(sideUrl)
         .then((response) => response.json())
         .then((data) => {
             for (let item of data.articles) {
-                // console.log(item);
                 if (item.urlToImage != null && item.title != null) {
                     sideScript += `<div class="news-random "><img src="${item.urlToImage}" alt=""><div class="news-roundup"><a href="${item.url}" target="_blank" class="heading-3">${item.title}</a></div></div>`;
                 }
@@ -137,27 +110,48 @@ let slide = () => {
         index = 0;
     }
 };
+
 pre.addEventListener("click", () => {
     if (index != 0) {
         index--;
         coursel.style.transform = "translateX(" + index * -34 + "%)";
     } else {
-        // index =
     }
 });
 
 next.addEventListener("click", slide);
-// loadStories();
-// loadSideStories();
-// loadHead();
-// loadBreaking();
-// loadEd();
-// loadEditorials();
-// loadBynational();
-// loadByinternational();
-// loadBycovid();
-// loadByBusiness();
-// loadBypolitics();
-// loadBySports();
 
-// Nname.addEventListener("click", loadnews);
+// navbar
+const specificNews = (searchItem) => {
+    let spcUrl = `https://newsapi.org/v2/everything?q=${searchItem}&sortBy=popularity&apiKey=${apiKey}`;
+    let html = "";
+
+    fetch(spcUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            for (let item of data.articles) {
+                if (
+                    item.author &&
+                    item.urlToImage &&
+                    item.publishedAt != null
+                ) {
+
+                    html += `<div class="news-section-cards">
+                <img src="${item.urlToImage}" alt="">
+                <p style="text-align: center;">${item.title}</p>
+                <p style="opacity:80%;">${item.author}</p>
+                <p style="opacity:70%;">${item.publishedAt.split('T')[0]}</p>
+                </div>`;
+                }
+            }
+
+            newsContainer.innerHTML = html;
+            newsContainer.classList.add("newsContainer-grid");
+        });
+
+};
+
+loadStories();
+loadSideStories();
+loadHead();
+loadEd();
