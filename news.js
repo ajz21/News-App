@@ -1,5 +1,6 @@
 let apiKey = "b65e82c1ab1b4e768a273f36de34557d";
 
+// intializing the urls
 let urledit = `https://newsapi.org/v2/everything?
 q=opinion editorial&
 sortBy=relevency&
@@ -24,6 +25,7 @@ let headLineUrl2 = `https://newsapi.org/v2/top-headlines?
 country=in&
 apiKey=${apiKey}`;
 
+// assiging avriable values
 let newsLaod = document.querySelector(".news-random2"),
     sideLoad = document.querySelector("#newsLoad"),
     headContainer = document.querySelector(".newsContent"),
@@ -35,6 +37,7 @@ let newsLaod = document.querySelector(".news-random2"),
     moreBtn = document.getElementById("more"),
     coursel = document.querySelector(".coursel");
 
+    
 // function for loading headline and Breaking news
 let loadHead = (url) => {
     let headScript = "";
@@ -43,6 +46,8 @@ let loadHead = (url) => {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
+
+            // fetching the headlines
             if (
                 data.articles[0].urlToImage != null &&
                 data.articles[0].title != null
@@ -51,8 +56,11 @@ let loadHead = (url) => {
                 <img id="head-img" src="${data.articles[0].urlToImage}" alt=""/>
                 <a href="${data.articles[0].url}" target="_blank" class="head-lines" id="head-text" style="font-size: 27px;">${data.articles[0].title}</a>`;
             }
+
+            // fetching the side breakings
             let arr = [];
 
+            // storing the objects which has url and titles
             for (let item of data.articles) {
                 if (
                     (item.urlToImage && item.title && item.url != null) ||
@@ -61,6 +69,8 @@ let loadHead = (url) => {
                     arr.push(item);
                 }
             }
+
+            // iterating through the array of articles
             for (let i = 1; i < 5; i++) {
                 sideHeadSrcipt += `
                 <div class="newsChild">
@@ -69,11 +79,14 @@ let loadHead = (url) => {
                 ${arr[i].title}</a>
                 </div>`;
             }
+
+            // adding html dynamically to the dom
             breaking.innerHTML = headScript;
             sideHeadLine.innerHTML = sideHeadSrcipt;
         });
 };
 
+// function to fetch the editorial page
 let loadEd = (url) => {
     let edScript = "";
 
@@ -81,6 +94,8 @@ let loadEd = (url) => {
         .then((response) => response.json())
         .then((data) => {
             for (let i of data.articles) {
+
+                // checking the articles with author and image
                 if (i.urlToImage != null && i.author != null) {
                     edScript += `
                     <div class="newsSlide newsCard">
@@ -90,6 +105,7 @@ let loadEd = (url) => {
                     </div>`;
                 }
             }
+
             coursel.innerHTML = edScript;
         });
 };
@@ -101,6 +117,8 @@ let loadStories = (url) => {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
+
+            // adding html dynamically as the main stories and inserting to the newsLaod container
             for (let item of data.articles) {
                 if (item.urlToImage != null && item.author != null) {
                     script += `
@@ -123,6 +141,8 @@ let loadSideStories = (url) => {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
+
+            // adding html dynamically as the side stories at the bottom
             for (let item of data.articles) {
                 if (item.urlToImage != null && item.title != null) {
                     sideScript += `
@@ -202,10 +222,16 @@ const specificNews = (searchItem) => {
         });
 };
 
+// home button to return to the home page after toggling through sections
+
 const home = () => {
+
+    // changing the display of the home news container
     newsContainer2.style.display = "flex";
     newsContainer.classList.remove("newsContainer-grid");
 };
+
+// more button to see more news at the end
 
 moreBtn.addEventListener("click", () => {
     newsLoadContainer.style.overflow = "visible";
@@ -213,7 +239,14 @@ moreBtn.addEventListener("click", () => {
     loadSideStories(sideUrl2);
 });
 
+// calling the function to load the home page
+
+// funciton calling the head lines and brakings
 loadHead(headLineUrl2);
+
+// funciton calling editorials
 loadEd(urledit);
+
+// function calling stories and side stories
 loadStories(storyUrl);
 loadSideStories(sideUrl);

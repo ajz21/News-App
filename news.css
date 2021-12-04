@@ -31,7 +31,6 @@ body {
     font-family: var(--font);
     font-size: 44px;
     margin: 1.5pc auto;
-    text-decoration: underline 2px #cccccc;
 }
 .heading-2 {
     margin: -.8pc 0pc;
@@ -48,8 +47,6 @@ section ul {
     display: flex;
     font-weight: bold;
     justify-content: space-between;
-}
-li {
     cursor: pointer;
 }
 .newsContent {
@@ -60,7 +57,6 @@ li {
 .newsCard {
     border: solid 1px #686868;
     background-color: var(--secColor);
-    /* background-color: whitesmoke; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -234,7 +230,8 @@ hr {
 .news-section-cards{
     width: 312px;
     height: 350px;
-    border: solid 2px white;
+    border: solid 2px var(--terColor);
+    background-color: var(--secColor);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
