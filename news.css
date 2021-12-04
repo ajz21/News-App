@@ -229,3 +229,20 @@ hr {
     align-items: center;
     justify-content: center;
 }
+.newsContainer-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.news-section-cards{
+    width: 312px;
+    height: 350px;
+    border: solid 2px white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1pc;
+}
+.news-section-cards img{
+    width: -webkit-fill-available;
+}
