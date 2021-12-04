@@ -37,7 +37,6 @@ let newsLaod = document.querySelector(".news-random2"),
     moreBtn = document.getElementById("more"),
     coursel = document.querySelector(".coursel");
 
-    
 // function for loading headline and Breaking news
 let loadHead = (url) => {
     let headScript = "";
@@ -46,7 +45,6 @@ let loadHead = (url) => {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-
             // fetching the headlines
             if (
                 data.articles[0].urlToImage != null &&
@@ -94,7 +92,6 @@ let loadEd = (url) => {
         .then((response) => response.json())
         .then((data) => {
             for (let i of data.articles) {
-
                 // checking the articles with author and image
                 if (i.urlToImage != null && i.author != null) {
                     edScript += `
@@ -117,7 +114,6 @@ let loadStories = (url) => {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-
             // adding html dynamically as the main stories and inserting to the newsLaod container
             for (let item of data.articles) {
                 if (item.urlToImage != null && item.author != null) {
@@ -141,7 +137,6 @@ let loadSideStories = (url) => {
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-
             // adding html dynamically as the side stories at the bottom
             for (let item of data.articles) {
                 if (item.urlToImage != null && item.title != null) {
@@ -158,11 +153,14 @@ let loadSideStories = (url) => {
         });
 };
 
+// declaring the index
 let index = 0;
 
 let next = document.getElementById("nextBtn");
 let pre = document.getElementById("preBtn");
 
+
+// function to move froward in news coursel
 let slide = () => {
     pre.classList.toggle("nextBtn", true);
     if (index < coursel.children.length - 3) {
@@ -173,6 +171,8 @@ let slide = () => {
     }
 };
 
+
+// function to move backwards in coursel
 pre.addEventListener("click", () => {
     if (index != 0) {
         index--;
@@ -181,6 +181,7 @@ pre.addEventListener("click", () => {
     }
 });
 
+// addeventlistener on next btn
 next.addEventListener("click", slide);
 
 // navbar
@@ -222,10 +223,10 @@ const specificNews = (searchItem) => {
         });
 };
 
+
 // home button to return to the home page after toggling through sections
 
 const home = () => {
-
     // changing the display of the home news container
     newsContainer2.style.display = "flex";
     newsContainer.classList.remove("newsContainer-grid");
