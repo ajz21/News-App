@@ -186,16 +186,16 @@ next.addEventListener("click", slide);
 
 // navbar
 const specificNews = (searchItem) => {
-    let spcUrl = `https://newsapi.org/v2/everything?
-    q=${searchItem}&
-    sortBy=popularity&
-    apiKey=${apiKey}`;
+
+    let spcUrl = `https://newsapi.org/v2/everything?q=${searchItem}&sortBy=popularity&apiKey=${apiKey}`;
 
     let html = "";
 
     fetch(spcUrl)
         .then((response) => response.json())
         .then((data) => {
+            console.log(spcUrl);
+            console.log(data);
             for (let item of data.articles) {
                 if (
                     item.author &&
