@@ -194,8 +194,6 @@ const specificNews = (searchItem) => {
     fetch(spcUrl)
         .then((response) => response.json())
         .then((data) => {
-            console.log(spcUrl);
-            console.log(data);
             for (let item of data.articles) {
                 if (
                     item.author &&
