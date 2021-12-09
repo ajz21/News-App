@@ -3,7 +3,7 @@ Javascript application using News API
 
 ## Demo
 
-<img src="https://github.com/ajz21/News-App/blob/master/ezgif.com-gif-maker%20(1).gif" alt="My Project GIF" width="800" height="400">
+<img src="https://github.com/ajz21/News-App/blob/master/ezgif.com-gif-maker%20(1).gif" alt="My Project GIF" width="1000" height="500">
 
 ## Features 
 - Instant and updated news
