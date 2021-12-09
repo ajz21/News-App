@@ -51,8 +51,8 @@ let loadHead = (url) => {
                 data.articles[0].title != null
             ) {
                 headScript += `
-                <img id="head-img" src="${data.articles[0].urlToImage}" alt=""/>
-                <a href="${data.articles[0].url}" target="_blank" class="head-lines" id="head-text" style="font-size: 27px;">${data.articles[0].title}</a>`;
+                <img id="head-img" src="${data.articles[10].urlToImage}" alt=""/>
+                <a href="${data.articles[10].url}" target="_blank" class="head-lines" id="head-text" style="font-size: 27px;">${data.articles[10].title}</a>`;
             }
 
             // fetching the side breakings
